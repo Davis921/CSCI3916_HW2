@@ -72,27 +72,7 @@ router.post('/signin', (req, res) => {
     }
 });
 
-router.route('/testcollection')
-    .delete(authController.isAuthenticated, (req, res) => {
-        console.log(req.body);
-        res = res.status(200);
-        if (req.get('Content-Type')) {
-            res = res.type(req.get('Content-Type'));
-        }
-        var o = getJSONObjectForMovieRequirement(req);
-        res.json(o);
-    }
-    )
-    .put(authJwtController.isAuthenticated, (req, res) => {
-        console.log(req.body);
-        res = res.status(200);
-        if (req.get('Content-Type')) {
-            res = res.type(req.get('Content-Type'));
-        }
-        var o = getJSONObjectForMovieRequirement(req);
-        res.json(o);
-    }
-    );
+
 
 router.route('/movies')
     .get((req, res) => {
@@ -111,7 +91,7 @@ router.route('/movies')
         var o = getJSONObjectForMovieRequirement(req);
         o.status = 201;
         o.message = "movie saved";
-        res.json(o);
+        res.status(201).json(o);
     })
     .put(authJwtController.isAuthenticated, (req, res) => {
         // HTTP PUT Method
